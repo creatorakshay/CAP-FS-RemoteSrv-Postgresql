@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="cpstoragelocationcreationrequest_srv" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="StockDetail" EntityType="cpstoragelocationcreationrequest_srv.StockDetail"/>
+            </EntityContainer>
+            <EntityType Name="StockDetail">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false"/>
+                <Property Name="TotalForecastedStock" Type="Edm.Decimal" Scale="variable"/>
+                <Property Name="UploadedSafetyStock" Type="Edm.Decimal" Scale="variable"/>
+                <Property Name="TotalQuota" Type="Edm.Decimal" Scale="variable"/>
+                <Property Name="ComputedField" Type="Edm.Decimal" Scale="variable"/>
+            </EntityType>
+            <Annotations Target="cpstoragelocationcreationrequest_srv.StockDetail/ComputedField">
+                <Annotation Term="Core.Computed" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

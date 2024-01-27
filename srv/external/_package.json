@@ -1,0 +1,10 @@
+{
+  "cds": {
+    "requires": {
+      "ext_srv_salesorder": {
+        "kind": "odata-v2",
+        "model": "srv/external/ext_srv_salesorder"
+      }
+    }
+  }
+}

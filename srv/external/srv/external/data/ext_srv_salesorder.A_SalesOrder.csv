@@ -1,0 +1,3 @@
+SalesOrder;SalesOrderType;SalesOrganization;DistributionChannel;
+1;A;Org1;D1
+2;B;Org2;D2

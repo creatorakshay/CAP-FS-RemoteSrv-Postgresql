@@ -1,0 +1,63 @@
+{
+  "name": "cpstock_app_creationrequest",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js/postgres": "^1.4.1",
+    "@sap/cds": "^7",
+    "express": "^4",
+    "mta": "^1.0.8",
+    "@sap-cloud-sdk/generator": "^3.6.0",
+    "@sap-cloud-sdk/http-client": "^3.6.0",
+    "@sap-cloud-sdk/resilience": "^3.6.0",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.21"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "@sap/ux-specification": "^1.120.2",
+    "rimraf": "^3.0.2"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-cpstock_fiori": "cds watch --open cpstock_fiori/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy undefined --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "postgres",
+        "impl": "@cap-js/postgres",
+        "credentials": {
+          "host": "localhost",
+          "port": 5432,
+          "database": "cpstocks",
+          "user": "postgres",
+          "password": "postgres"
+        }
+      },
+      "ext_srv_salesorder": {
+        "kind": "odata-v2",
+        "model": "srv/external/srv/external/ext_srv_salesorder",
+        "csrf": true,
+        "csrfiInBatch": true,
+        "credentials": {
+          "url": "http://groot.ccss.capgemini.com:50000/sap/opu/odata/sap/API_SALES_ORDER_SRV"
+        },
+        "[production]": {
+          "credentials": {
+            "destination": "O21_NOPP_API"
+          }
+        }
+      }
+    }
+  },
+  "sapux": [
+    "app/cpstock_fiori"
+  ]
+}
